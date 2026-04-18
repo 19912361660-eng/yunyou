@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: your-mysql-password
+      MYSQL_DATABASE: yunyou_db
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  backend:
+    build: .
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=False
+      - DB_HOST=db
+      - DB_NAME=yunyou_db
+      - DB_USER=root
+      - DB_PASSWORD=your-mysql-password
+    depends_on:
+      - db
+    volumes:
+      - ./media:/app/media
+      - ./backups:/app/backups
+
+volumes:
+  mysql_data:

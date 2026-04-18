@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #2D5CFE;
+  --color-accent: #FF7D00;
+  --color-text-main: #1d1d1f;
+  --color-text-sub: #424245;
+  --font-sans: "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+  
+  --glass-bg: rgba(255, 255, 255, 0.45);
+  --glass-border: rgba(255, 255, 255, 0.3);
+  --bg-gradient: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+}
+
+@layer base {
+  body {
+    @apply bg-[var(--bg-gradient)] text-[var(--color-text-main)] font-sans;
+    margin: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-[24px];
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .nav-icon {
+    @apply w-11 h-11 rounded-xl flex items-center justify-center bg-white/30 cursor-pointer transition-all duration-200 text-[var(--color-text-sub)] text-[10px] text-center leading-[1.1] font-medium hover:bg-white/60;
+  }
+
+  .nav-icon.active {
+    @apply bg-primary text-white shadow-[0_8px_16px_rgba(45,92,254,0.3)];
+  }
+
+  .btn-primary {
+    @apply bg-primary text-white py-2 px-4 rounded-full font-semibold transition-all hover:opacity-90 active:scale-95;
+  }
+
+  .btn-ghost {
+    @apply bg-white/30 text-[var(--color-text-sub)] py-2 px-4 rounded-full font-medium hover:bg-white/50 transition-all;
+  }
+}
